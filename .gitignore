@@ -1,0 +1,5 @@
+.vscode/
+.env.cmake
+build/
+shaders/*.spv
+.env.cmake
