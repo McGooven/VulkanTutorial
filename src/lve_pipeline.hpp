@@ -6,24 +6,42 @@
 #include <vector>
 
 namespace lve {
-    // struct PipelineConfigInfo {};
+    struct PipelineConfigInfo {};
 
     class LvePipeline {
         public:
             LvePipeline(
-                // const LveDevice& device,
+                LveDevice& device,
                 const std::string& vertFilepath,
-                const std::string& fragFilepath
-                // const PipelineConfigInfo& configInfo
+                const std::string& fragFilepath,
+                const PipelineConfigInfo& configInfo
             );
+            ~LvePipeline(){}
+            LvePipeline(const LvePipeline&)=delete;
+            void operator=(const LvePipeline&)=delete;
+
+            static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
         private:
             static std::vector<char> readFile(const std::string& filepath);
             void createGraphicsPipeline(
                 const std::string& vertFilepath,
-                const std::string& fragFilepath
-                // const PipelineConfigInfo& configInfo
+                const std::string& fragFilepath,
+                const PipelineConfigInfo& configInfo
             );
-            // LveDevice& lveDevice;
+            void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
+
+            /**
+             * Potentially "Memory unsafe" if not by the aggregation feature.
+            */
+            LveDevice& lveDevice;
+
+            /**
+             * handle to vulkan's pipeline object
+            */
+            VkPipeline graphicsPipeline;
+
+            VkShaderModule vertShaderModule;
+            VkShaderModule fragShaderModule;
     };
 }

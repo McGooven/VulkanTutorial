@@ -47,12 +47,43 @@ void DestroyDebugUtilsMessengerEXT(
 }
 
 // class member functions
+
+/**
+ * Constructor
+*/
 LveDevice::LveDevice(LveWindow &window) : window{window} {
+  /**
+   * initialize the vulkan library and works as the connection 
+   * between the the library and this application
+  */
   createInstance();
+
+  /**
+   * set up validation layers to check for vulkan errors
+   * (desable in production for better performance)
+  */
   setupDebugMessenger();
+
+  /**
+   * create a surface with glfw being the connection between the window (probably the LveWindow object)
+   * and the vulkan's ability to display results.
+  */
   createSurface();
+
+  /**
+   * getting the phisical device that the application will be using (graphic device in the system capable of use vulkan API, like a GPU).
+   * even you can use multiple devices at the same time, but for now we'll keep it with a single device.
+  */
   pickPhysicalDevice();
+
+  /**
+   * creates the logical device wich describe the features of the physical devices, we want to use.
+  */
   createLogicalDevice();
+
+  /**
+   * Command buffer allocation
+  */
   createCommandPool();
 }
 
