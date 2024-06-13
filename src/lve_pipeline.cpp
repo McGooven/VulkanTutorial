@@ -111,6 +111,21 @@ namespace lve {
         configInfo.rasterizationInfo.depthBiasClamp = 0.0f;           // Optional
         configInfo.rasterizationInfo.depthBiasSlopeFactor = 0.0f;     // Optional
 
+        /**
+         * Multi-sampling
+         * 
+         * determine how the rasterizer handles the "edges" of the geometry (e.g. a single triangle).
+         * Allowing (if enabled) to reduce the jagged look in objects due to the fragments in-out (from a triangle's edge pov) calculation
+         * results based on the center of pixels.
+        */
+        configInfo.multisampleInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+        configInfo.multisampleInfo.sampleShadingEnable = VK_FALSE;
+        configInfo.multisampleInfo.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+        configInfo.multisampleInfo.minSampleShading = 1.0f;           // Optional
+        configInfo.multisampleInfo.pSampleMask = nullptr;             // Optional
+        configInfo.multisampleInfo.alphaToCoverageEnable = VK_FALSE;  // Optional
+        configInfo.multisampleInfo.alphaToOneEnable = VK_FALSE;       // Optional
+
         return configInfo;
     }
 }
