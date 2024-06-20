@@ -154,6 +154,22 @@ namespace lve {
         configInfo.colorBlendInfo.blendConstants[2] = 0.0f;  // Optional
         configInfo.colorBlendInfo.blendConstants[3] = 0.0f;  // Optional
 
+        /**
+         * Depth buffer
+         * 
+         * it's an aditional attachement to the frame buffer that store a value (depth value) for each pixel on a fragment.
+        */
+        configInfo.depthStencilInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+        configInfo.depthStencilInfo.depthTestEnable = VK_TRUE;
+        configInfo.depthStencilInfo.depthWriteEnable = VK_TRUE;
+        configInfo.depthStencilInfo.depthCompareOp = VK_COMPARE_OP_LESS;
+        configInfo.depthStencilInfo.depthBoundsTestEnable = VK_FALSE;
+        configInfo.depthStencilInfo.minDepthBounds = 0.0f;  // Optional
+        configInfo.depthStencilInfo.maxDepthBounds = 1.0f;  // Optional
+        configInfo.depthStencilInfo.stencilTestEnable = VK_FALSE;
+        configInfo.depthStencilInfo.front = {};  // Optional
+        configInfo.depthStencilInfo.back = {};   // Optional
+
         return configInfo;
     }
 }
