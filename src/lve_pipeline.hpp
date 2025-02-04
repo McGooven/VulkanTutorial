@@ -29,7 +29,7 @@ namespace lve {
                 const std::string& fragFilepath,
                 const PipelineConfigInfo& configInfo
             );
-            ~LvePipeline(){}
+            ~LvePipeline();
             LvePipeline(const LvePipeline&)=delete;
             void operator=(const LvePipeline&)=delete;
 
